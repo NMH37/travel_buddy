@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Travels</title>
+    <style>
+            #customers {
+                font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+                border-collapse: collapse;
+                width: 100%;
+            }
+            
+            #customers td, #customers th {
+                border: 1px solid #ddd;
+                padding: 8px;
+            }
+            
+            #customers tr:nth-child(even){background-color: #f2f2f2;}
+            
+            #customers tr:hover {background-color: #ddd;}
+            
+            #customers th {
+                padding-top: 12px;
+                padding-bottom: 12px;
+                text-align: left;
+                background-color: #4CAF50;
+                color: white;
+            }
+            .left{
+                display: inline;
+            }
+
+            .right{
+                margin-left: 90%;
+                margin-bottom: 2%
+            }
+
+            .add_trip{
+                margin-left: 90%;
+                margin-top :5%
+            }
+            </style>
+
+
+</head>
+<body>
+    <div class='left'>
+        <h2>Welcome {{user.username}} ! </h2>
+        <h4>Your Trip schedule</h4>
+    </div>
+
+    <div class='right'>
+        <a href="logout">Logout</a>
+    </div>
+
+    <table id="customers">
+            <tr>
+              <th>Destination</th>
+              <th>Travel Start Date</th>
+              <th>Travel End Date</th>
+              <th>Plan </th>
+            </tr>
+            
+               {% for trip in user.trips.all %}
+            <tr>
+              <td><a href="destination/{{trip.id}}" >{{ trip.destination }} </a></td>
+             
+              <td>{{trip.date_from}}</td>
+              <td>{{trip.date_to}}</td>
+              <td>{{trip.description}}</td>
+              
+            </tr>
+            {% endfor %}
+           
+          </table>
+          <hr>
+          <h4>Other's Trip schedule</h4>
+    <table id="customers">
+                <tr>
+                    <th>Name</th> 
+                  <th>Destination</th>
+                  <th>Travel Start Date</th>
+                  <th>Travel End Date</th>
+                  <th>Want to Join </th>
+                </tr>
+                
+                   {% for trip in all_users %}
+                <tr>
+                    <td>{{ trip.user.name }} </td> 
+                  <td><a href="destination/{{trip.id}}" >{{ trip.destination }} </a></td>
+                 
+                  <td>{{trip.date_from}}</td>
+                  <td>{{trip.date_to}}</td>
+                  <td><a href='jointrip/{{trip.id}}'>Join </a></td>
+                  
+                </tr>
+                {% endfor %}
+               
+              </table>
+
+    
+        <div class="add_trip">  
+          <a href="add_trip">Add Travel Plan</a>
+        </div>
+
+
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Add trip</title>
+    <style>
+    .right {
+        margin-left: 90%
+    }
+    </style>
+</head>
+<body>
+            <div class='right'>
+                <a href="dashboard">Home</a>
+                <a href="logout">Logout</a>
+            </div>
+            <h2> Add a Trip </h2>
+                <form action="addtrip" method="POST" >
+                    {% csrf_token %}
+                    <p>Destination: <input type="text" name="destination" ></p>
+                    <p>Description:</p>
+                    <textarea name='description'rows="4" cols="50"></textarea>
+                            
+                    <p> Travel Date From <input type="date" name="fromdate"></p>
+                    <p> Travel Date to <input type="date" name="todate"></p>
+                    <p><input type="submit" name="trip"  value="Add Trip"></p>
+    
+                </form>
+       
+</body>
+</html>
