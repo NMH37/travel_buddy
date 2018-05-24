@@ -35,29 +35,29 @@ class UserManager(models.Manager):
                 return valid
 
 
-    def login(self,request):
-        if request.method == "POST":
-            valid = True
-            username = request.POST['username']
-            password = request.POST['password']
+   # def login(self,request):
+      #  if request.method == "POST":
+      #      valid = True
+       #     username = request.POST['username']
+        #    password = request.POST['password']
 
-            user = User.objects.filter(username=username)
-            if len(user) > 0:
+         #   user = User.objects.filter(username=username)
+           # if len(user) > 0:
                 # check password 
                 # if password matches save user.id
                 #else show error and redirect root
                
 
-                request.session['active_id'] = user[0].id
-                print user[0].id
-                print user
-                valid = True
-                return valid
+            #    request.session['active_id'] = user[0].id
+            #    print user[0].id
+            #    print user
+            #    valid = True
+            #    return valid
 
-            else:
-                messages.error(request,"User doesn't exist ! pls register")
-                valid = False
-                return valid
+            #else:
+            #    messages.error(request,"User doesn't exist ! pls register")
+            #    valid = False
+            #    return valid
 
 	   
 
