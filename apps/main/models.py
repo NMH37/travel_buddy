@@ -80,23 +80,23 @@ class TripManager(models.Manager):
             valid = True
             for key in request.POST:
                 if request.POST[key] == "":
-                    messages.error(request,"Please enter {}".format(key))
-                    valid = False
-                if request.POST['fromdate']> request.POST['todate']: # not functional yet
-                    messages.error(request,"Please select valid dates")
+                    messages.error(request,"Please enter all inputs")
                     valid = False
                     return valid
+                if request.POST['fromdate']> request.POST['todate']: 
+                        messages.error(request,"Please select valid dates")
+                        valid = False
+                        return valid
                 else:
                     valid = True
                     destination = request.POST['destination']
                     description = request.POST['description']
                     date_from = request.POST['fromdate']
                     date_to = request.POST['todate']
-                    if valid == True:
-                        user= User.objects.get(id=request.session['id'])
-                        Trip.objects.create(destination=destination,description=description,date_from=date_from,date_to=date_to,user=user)
-               
-                        return valid
+                    user= User.objects.get(id=request.session['id'])
+                    trip = Trip.objects.create(destination=destination,description=description,date_from=date_from,date_to=date_to,user=user)
+                    GoingonTrip.objects.create(trip=trip,user=user)
+                    return valid
 
 
 

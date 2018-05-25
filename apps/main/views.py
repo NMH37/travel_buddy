@@ -7,15 +7,12 @@ from django.contrib import messages
 
 
 def index(request):
-   
     return render(request,'main/index.html')
 
 
 
 def register(request):
-
     User.objects.validate(request)
-
     return redirect('/')
 
 
@@ -38,7 +35,7 @@ def addtrip(request):
             print "trip added"
             return redirect('/dashboard') # redirect to dash board
         else:
-            return redirect('/addtrip')
+            return redirect('/add_trip')
 
 
 #def login(request):
@@ -74,7 +71,7 @@ def jointrip(request,trip_id):
     new_trip = Trip.objects.get(id=trip_id)
     user = User.objects.get(id = request.session['id'])
     user.trips.add(new_trip)
-    #GoingonTrip.objects.create(trip=trip_id,user=user.id)
+    GoingonTrip.objects.create(trip=new_trip,user=user)
     return redirect('/dashboard')
 
 def destination(request,trip_id):
