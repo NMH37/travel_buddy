@@ -43,25 +43,31 @@ def addtrip(request):
     #return redirect('/dashboard')
 
 def login(request):
+    if request.method == "POST":
+       username = request.POST['username']
+       password = request.POST['password']
+        
+    for key in request.POST:
+            if request.POST[key] == "":
+                messages.error(request,"Please enter all inputs")
+                valid = False
+                return redirect('/')
 
-	username = request.POST['username']
-	password = request.POST['password']
+    user = User.objects.filter(username=username)
+    if len(user) > 0:
+		        # if user exists, check password
+        isPassword = bcrypt.checkpw(password.encode(), user[0].password.encode())
+        if isPassword:
+            request.session['id'] = user[0].id
+            return redirect('/dashboard')
+        else:
+            messages.error(request, "Incorrect username/password combination.")
+            return redirect('/')
+    else:
+        messages.error(request, "User does not exist. Please Register first!")
+        return redirect('/')
 
-	user = User.objects.filter(username=username)
-	if len(user) > 0:
-		# if user exists, check password
-		isPassword = bcrypt.checkpw(password.encode(), user[0].password.encode())
-		if isPassword:
-			request.session['id'] = user[0].id
-			return redirect('/dashboard')
-		else:
-			messages.error(request, "Incorrect username/password combination.")
-			return redirect('/')
-	else:
-		messages.error(request, "User does not exist.")
-		return redirect('/')
-
-	return redirect('/')
+	               
 
 def logout(request):
     request.session.clear()
@@ -76,7 +82,7 @@ def jointrip(request,trip_id):
 
 def destination(request,trip_id):
     trip_details = Trip.objects.get(id=trip_id)
-    trip_buddy = Trip.objects.filter(id=trip_id)
+    #trip_buddy = Trip.objects.filter(id=trip_id)
     trip_buddy = GoingonTrip.objects.filter(trip=trip_id) #,user=user)# going to add goingontrip model
     context={
         'trip_details':trip_details,

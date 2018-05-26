@@ -20,11 +20,11 @@
         </ul>
         {% endif %}
             <div class='right'>
-                <a href="dashboard">Home</a>
-                <a href="logout">Logout</a>
+                <a href="/dashboard">Home</a>
+                <a href="/logout">Logout</a>
             </div>
             <h2> Add a Trip </h2>
-                <form action="addtrip" method="POST" >
+                <form action="/addtrip" method="POST" > <!--added to all routes/ -->
                     {% csrf_token %}
                     <p>Destination: <input type="text" name="destination" ></p>
                     <p>Description:</p>

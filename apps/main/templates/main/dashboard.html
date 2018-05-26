@@ -52,7 +52,7 @@
     </div>
 
     <div class='right'>
-        <a href="logout">Logout</a>
+        <a href="/logout">Logout</a>
     </div>
 
     <table id="customers">
@@ -65,7 +65,7 @@
             
                {% for trip in user.trips.all %}
             <tr>
-              <td><a href="destination/{{trip.id}}" >{{ trip.destination }} </a></td>
+              <td><a href="/destination/{{trip.id}}" >{{ trip.destination }} </a></td>
              
               <td>{{trip.date_from}}</td>
               <td>{{trip.date_to}}</td>
@@ -86,14 +86,14 @@
                   <th>Want to Join </th>
                 </tr>
                 
-                   {% for trip in all_users %}
+                   {% for trip in all_users %} <!--added / before all routes -->
                 <tr>
                     <td>{{ trip.user.name }} </td> 
-                  <td><a href="destination/{{trip.id}}" >{{ trip.destination }} </a></td>
+                  <td><a href="/destination/{{trip.id}}" >{{ trip.destination }} </a></td>
                  
                   <td>{{trip.date_from}}</td>
                   <td>{{trip.date_to}}</td>
-                  <td><a href='jointrip/{{trip.id}}'>Join </a></td>
+                  <td><a href='/jointrip/{{trip.id}}'>Join </a></td>
                   
                 </tr>
                 {% endfor %}
@@ -102,7 +102,7 @@
 
     
         <div class="add_trip">  
-          <a href="add_trip">Add Travel Plan</a>
+          <a href="/add_trip">Add Travel Plan</a>
         </div>
 
 
