@@ -18,7 +18,7 @@ urlpatterns = [
     url(r'^destination/dashboard$',views.dashboard),
     url(r'^addtrip$',views.addtrip),
     url(r'^jointrip/(?P<trip_id>\d+)$',views.jointrip),
-    url(r'^destination/jointrip/(?P<trip_id>\d+)$',views.jointrip),
+    url(r'^destination/jointrip/(?P<trip_id>\d+)$',views.destination),
     url(r'^destination/(?P<trip_id>\d+)$',views.destination),
     url(r'^add_trip$',views.add_trip)  # put in view
   ]

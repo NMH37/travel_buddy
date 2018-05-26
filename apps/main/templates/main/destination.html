@@ -25,9 +25,10 @@
 
     <hr>
     <h2>Other Users joining the trip</h2>
-    {% for key in trip_buddy %}
-    {{key.user.name}}
-    {% endfor %}
+   {% for key in trip_buddy %}
+    <p>{{ key.user.name}}</p>
+   {% endfor %}
+   
 
   
 </body>

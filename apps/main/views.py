@@ -76,11 +76,13 @@ def jointrip(request,trip_id):
 
 def destination(request,trip_id):
     trip_details = Trip.objects.get(id=trip_id)
-    trip_buddy = Trip.objects.filter(id=trip_id) # going to add goingontrip model
+    trip_buddy = Trip.objects.filter(id=trip_id)
+    trip_buddy = GoingonTrip.objects.filter(trip=trip_id) #,user=user)# going to add goingontrip model
     context={
         'trip_details':trip_details,
         'trip_buddy':trip_buddy
     }
+    print trip_buddy
     return render(request,'main/destination.html',context)
 
 
